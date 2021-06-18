@@ -1,0 +1,41 @@
+include io
+
+modify: func(x) =>
+    <- x * 8 - 1
+endfn
+
+modify_2: func(x, y) =>
+    <- x * y -2
+endfn
+
+modify_3: func(x, y, z) =>
+    <- x * z / y - 2
+endfn
+
+var => 4
+
+# var => var + 3
+var +> 3
+
+# var => var - 9
+var -> 9
+
+# var => var * 12
+var *> 12
+
+# var => var / 5
+var /> 5
+
+# var => var % 7
+var %> 7
+
+# var => !(modify var)
+var !> modify
+
+# var => !(modify_2 var 5)
+var !> (modify $ 5)
+
+# var => !(modify_3 2 var 9)
+var !> (modify 2 $ 9)
+
+!(io::printLine var)

@@ -1,0 +1,21 @@
+include io
+include string::{format}
+
+index_element: func(num, elem) =>
+    <- !(format "%0 -> %1" [!{Str num} elem])
+endfn
+
+main: func() =>
+    array => []
+    while true:
+        array .> !io::input
+        !(io::printLine "Elementos")
+
+        count => 0
+        while count < !(length array), count +> 1:
+            !(io::printLine !(index_element count (count @ array))) # Paréntesis están demás, pero es para claridad
+        endwl
+    endwl
+endfn
+
+!main

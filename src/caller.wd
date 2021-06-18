@@ -1,0 +1,32 @@
+include io::{printLine}
+
+caller: func(f, x, y) =>
+    <- !(f x y)
+endfn
+
+add: func(x, y) =>
+    <- x + y
+endfn
+
+sub: func(x, y) =>
+    <- x - y
+endfn
+
+max: func(x, y) =>
+    if x > y:
+        <- x
+    endif
+    <- y
+endfn
+
+!(printLine !(caller add 2 3) == 5)
+!(printLine !(caller sub 10 7) == 3)
+!(printLine !(caller max 22.8 30.78881) == 30.78881)
+
+
+# Porque puedo (ojalá):
+!(printLine !(caller
+    max
+    !(caller add 2 3)
+    !(caller sub 4 5)
+) == 5)

@@ -1,0 +1,19 @@
+include io
+
+# Test 1
+in => !io::input
+!(io::printLine "You wrote: " . in)
+
+# Test 2
+!(io::print "Write a number: ")
+num1 => !(toNum !io::input)
+
+!(io::print "Write another number: ")
+num2 => !(toNum !io::input)
+
+sum => !(toStr num1 + num2)
+!(io::printLine "The sum of both numbers is: " . !(toStr sum))
+
+# Test 3
+num3 => !(toNum sum) * 5
+!(io::printLine "I just printed the number " . !(toStr num3) . "/5")

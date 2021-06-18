@@ -1,0 +1,41 @@
+include io
+
+Complex: record =>
+    real => 0
+    im => 0
+
+instance:
+    add: func(z) =>
+        <- !{Complex z'real + this'real z'im + this'im}
+    endfn
+
+    mul: func(z) =>
+        <- !{Complex (z'real * this'real - z'im * this'im) (z'real * this'im + this'real * z'im)}
+    endfn
+
+    abs: func() =>
+        <- this'real * this'real + this'im * this'im
+    endfn
+endrc
+
+main: func() =>
+    y => -1
+    while y < 1, y => y + 0.05:
+        x => -2.05
+        while x < 0.55, x => x + 0.03:
+            z => !{Complex}
+            i => 0
+            while i <= 100, i => i + 1:
+                z => !(!(z'mul z)'add !{Complex x y})
+            endwl
+            if !z'abs < 2:
+                !(io::print "#")
+            else:
+                !(io::print ":")
+            endif
+        endwl
+        !(io::printLine "")
+    endwl
+endfn
+
+!main

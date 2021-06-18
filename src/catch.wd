@@ -1,0 +1,24 @@
+include io::{input printLine}
+
+reduce: func(num) =>
+    <- num % 3, num % 2
+endfn
+
+var => ""
+!(reduce !input) catch =>
+    when 0:
+        var => ":)"
+    when 1:
+        var => ":|"
+    when 2:
+        var => ":("
+endct
+!(printLine var)
+
+!(reduce !input) ~> err catch =>
+    when 0:
+        var => ":o"
+    when 1:
+        var => ":0"
+endct
+!(printLine var)

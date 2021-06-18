@@ -1,0 +1,33 @@
+include io
+include string::{format}
+
+Error: record =>
+    prefix => ""
+    msg => ""
+
+instance:
+    string: func() =>
+        <- !(format "%0: %1." [this'prefix, this'msg])
+    endfn
+endrc
+
+divide: func(x, y) =>
+    if y == 0:
+        <- null, !{Error "MathError" "Division by 0"}
+    endif
+    <- x / y
+endfn
+
+main: func() =>
+    num1 => !(toNum !io::input)
+    num2 => !(toNum !io::input)
+
+    res => !(divide num1 num2) ~> error
+    if error:
+        !(io::printLine !error'string)
+    else:
+        !(io::printLine res)
+    endif
+endfn
+
+!main
